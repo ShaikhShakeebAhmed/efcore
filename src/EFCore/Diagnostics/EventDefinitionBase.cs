@@ -87,7 +87,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     The configured <see cref="WarningBehavior"/>.
         /// </summary>
-        public virtual WarningBehavior WarningBehavior { get;  }
+        public virtual WarningBehavior WarningBehavior { get; }
 
         internal sealed class MessageExtractingLogger : ILogger
         {

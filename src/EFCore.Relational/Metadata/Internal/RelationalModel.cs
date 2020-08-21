@@ -829,6 +829,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             break;
                         }
 
+                        if (entityTypeMapping.IncludesDerivedTypes
+                            && foreignKey.DeclaringEntityType != entityType
+                            && foreignKey.Properties.SequenceEqual(entityType.FindPrimaryKey().Properties))
+                        {
+                            // The identifying FK constraint is needed to be created only on the table that corresponds
+                            // to the declaring entity type
+                            break;
+                        }
+
                         constraint = new ForeignKeyConstraint(name, table, principalTable, columns, principalColumns,
                             ToReferentialAction(foreignKey.DeleteBehavior));
                         constraint.MappedForeignKeys.Add(foreignKey);

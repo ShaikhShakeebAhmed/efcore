@@ -331,8 +331,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected IServiceProvider CreateServiceProvider(bool sensitiveDataLoggingEnabled = false)
             => TestHelpers.CreateContextServices(
                 new ServiceCollection()
-                    .AddScoped<IDiagnosticsLogger<DbLoggerCategory.Model>>(_ => CreateModelLogger(sensitiveDataLoggingEnabled))
-                    .AddScoped<IDiagnosticsLogger<DbLoggerCategory.Model.Validation>>(_ => CreateValidationLogger(sensitiveDataLoggingEnabled)));
+                    .AddScoped<IDiagnosticsLogger<DbLoggerCategory.Model>>(s => CreateModelLogger(sensitiveDataLoggingEnabled))
+                    .AddScoped<IDiagnosticsLogger<DbLoggerCategory.Model.Validation>>(s => CreateValidationLogger(sensitiveDataLoggingEnabled)));
 
         protected ProviderConventionSetBuilderDependencies CreateDependencies(bool sensitiveDataLoggingEnabled = false)
             => CreateServiceProvider(sensitiveDataLoggingEnabled).GetRequiredService<ProviderConventionSetBuilderDependencies>();

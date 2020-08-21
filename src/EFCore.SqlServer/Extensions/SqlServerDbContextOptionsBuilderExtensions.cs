@@ -169,12 +169,8 @@ namespace Microsoft.EntityFrameworkCore
                 = optionsBuilder.Options.FindExtension<CoreOptionsExtension>()
                 ?? new CoreOptionsExtension();
 
-            coreOptionsExtension = coreOptionsExtension.
-                WithWarningsConfiguration(
-                coreOptionsExtension.WarningsConfiguration.TryWithExplicit(
-                    RelationalEventId.AmbientTransactionWarning, WarningBehavior.Throw)).
-                WithWarningsConfiguration(
-                coreOptionsExtension.WarningsConfiguration.TryWithExplicit(
+            coreOptionsExtension = RelationalOptionsExtension.WithDefaultWarningConfiguration(coreOptionsExtension)
+                .WithWarningsConfiguration(coreOptionsExtension.WarningsConfiguration.TryWithExplicit(
                     SqlServerEventId.ConflictingValueGenerationStrategiesWarning, WarningBehavior.Throw));
 
             ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(coreOptionsExtension);
